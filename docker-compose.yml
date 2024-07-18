@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # livrariafiap.api:
+  #   image: ${DOCKER_REGISTRY-}livrariafiapapi
+  #   container_name: livrariafiap.api
+  #   build:
+  #     context: .
+  #     dockerfile: LivrariaFiap.Api/Dockerfile
+  #   ports:
+  #       - "5000:5000"
+  #       - "5001:5001"
+
+  livrariafiap.database:
+    image: postgres:latest
+    container_name: livrariafiap.database
+    environment:
+        - POSTGRES_DB=livraria
+        - POSTGRES_USER=postgres        
+        - POSTGRES_PASSWORD=postgres
+    volumes:
+        - ./.containers/livraria-fiap:/var/lib/postgresql/data
+    ports:
+        - 5432:5432  
+  
