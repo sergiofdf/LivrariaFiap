@@ -10,9 +10,9 @@ namespace LivrariaFiap.Infrastructure.Repository.Configurations
         {
             builder.ToTable("Estoque");
             builder.HasKey(p => p.Id);
-            //builder.Property(p => p.Id).HasColumnType("Integer").ValueGeneratedNever().UseIdentityColumn();
             builder.Property(p => p.DataCriacao).HasColumnType("timestamp").IsRequired();
             builder.Property(p => p.Quantidade).HasColumnType("SMALLINT");
+            builder.HasOne(e => e.Livro).WithOne().HasForeignKey<Estoque>(e => e.LivroId);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Carter;
+using LivrariaFiap.Application.ClienteServices;
 using LivrariaFiap.Application.Dtos;
-using LivrariaFiap.Domain.Abstractions;
-using LivrariaFiap.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LivrariaFiap.Api.EndPoints
 {
@@ -15,41 +15,31 @@ namespace LivrariaFiap.Api.EndPoints
             group.MapPost("", CadastrarCliente);
             group.MapGet("", ListarClientes);
             group.MapGet("{id}", ConsultarCliente).WithName(nameof(ConsultarCliente));
-            //group.MapPut("{id}", UpdateProduct).WithName(nameof(UpdateProduct));
+            group.MapPut("{id}", AlterarCliente).WithName(nameof(AlterarCliente));
+            group.MapDelete("{id}", DeletarCliente).WithName(nameof(DeletarCliente));
         }
 
         public async Task<Created> CadastrarCliente(
-            ClienteModel requestBody,
+            ClienteDto dto,
             IClienteService service,
             IMapper mapper)
         {
 
-            Endereco mappedEnd = mapper.Map<Endereco>(requestBody.Endereco);
-            Telefone mappedTel = mapper.Map<Telefone>(requestBody.Telefone);
-
-            var entity = new Cliente
-            {
-                Nome = requestBody.Nome,
-                Email = requestBody.Email,
-                Endereco = mappedEnd,
-                Telefone = mappedTel
-            };
-
-            await service.Cadastrar(entity);
+            await service.Cadastrar(dto);
 
             return TypedResults.Created();
         }
 
-        public async Task<Ok<IList<Cliente>>> ListarClientes(
+        public async Task<Ok<List<ClienteResponseDto>>> ListarClientes(
             IClienteService service,
             IMapper mapper)
         {
-            var clientes = await service.ObterTodos() ?? new List<Cliente>();
+            var clientes = await service.ObterTodos() ?? [];
 
             return TypedResults.Ok(clientes);
         }
 
-        public async Task<Results<Ok<Cliente>, NotFound<string>>> ConsultarCliente(
+        public async Task<Results<Ok<ClienteResponseDto>, NotFound<string>>> ConsultarCliente(
             int id,
             IClienteService service)
         {
@@ -59,6 +49,25 @@ namespace LivrariaFiap.Api.EndPoints
             if (cliente is null) return TypedResults.NotFound("Cliente não encontrado!");
 
             return TypedResults.Ok(cliente);
+        }
+
+        public async Task<NoContent> AlterarCliente(
+            [FromRoute] int id,
+            [FromBody] ClienteDto dto,
+            IClienteService service)
+        {
+            await service.Alterar(id, dto);
+
+            return TypedResults.NoContent();
+        }
+
+        public async Task<NoContent> DeletarCliente(
+            [FromRoute] int id,
+            IClienteService service)
+        {
+            await service.Deletar(id);
+
+            return TypedResults.NoContent();
         }
     }
 }

@@ -10,19 +10,34 @@ namespace LivrariaFiap.Application.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<EnderecoModel, Endereco>();
-            CreateMap<TelefoneCreateModel, Telefone>();
             CreateMap<LivroDto, Livro>()
                 .ForMember(dst => dst.ItemsPedido, opt => opt.MapFrom(opt => new Collection<ItemPedido>()));
-            CreateMap<ItemPedidoResponseModel, ItemPedido>();
             CreateMap<Livro, LivroResponseDto>().ReverseMap();
-            //CreateMap<Cliente, ClienteResponseModel>()
-            //    .ForMember(dst => dst.Pedidos, src => src.MapFrom(p => p.Pedidos.Select(p => new PedidoCliente()
-            //    {
-            //        ItemsPedido = p.ItemsPedido,
-            //        Status = p.Status,
-            //        ValorPedido = p.ValorPedido
-            //    })));
+
+            CreateMap<EstoqueDto, Estoque>();
+            CreateMap<Estoque, EstoqueResponseDto>()
+                .ForMember(dst => dst.IdEstoque, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<EstoqueResponseDto, Estoque>()
+                .ForMember(dst => dst.Id, opt => opt.Ignore());
+
+            CreateMap<PedidoDto, Pedido>();
+
+            CreateMap<ItemPedidoResponseDto, ItemPedido>();
+
+            CreateMap<EnderecoDto, Endereco>();
+            CreateMap<TelefoneCreateDto, Telefone>();
+
+
+
+            CreateMap<ClienteDto, Cliente>();
+            CreateMap<Cliente, ClienteResponseDto>();
+            //.ForMember(dst => dst.Pedidos, opt => opt.MapFrom(src => src.Pedidos.Select(src => new PedidoCliente()
+            //{
+            //    ItemsPedido = src.ItemsPedido,
+            //    Status = src.Status,
+            //    ValorPedido = src.ValorPedido
+            //})));
         }
     }
 }

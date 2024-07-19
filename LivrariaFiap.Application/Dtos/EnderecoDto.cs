@@ -1,6 +1,6 @@
 ﻿namespace LivrariaFiap.Api.Models
 {
-    public class EnderecoModel
+    public class EnderecoDto
     {
         public string Rua { get; set; }
         public string Cidade { get; set; }

@@ -4,7 +4,7 @@
     {
         public double ValorPedido { get; set; }
         public StatusPedido Status { get; set; }
-        public ICollection<ItemPedido> ItemsPedido { get; set; }
+        public ICollection<ItemPedido> ItemsPedido { get; set; } = [];
         public Cliente Cliente { get; set; }
 
     }

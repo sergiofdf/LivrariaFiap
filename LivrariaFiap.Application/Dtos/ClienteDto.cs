@@ -3,23 +3,23 @@ using LivrariaFiap.Domain.Entities;
 
 namespace LivrariaFiap.Application.Dtos
 {
-    public class ClienteModel
+    public class ClienteDto
     {
         public string Nome { get; set; }
         public string Email { get; set; }
 
-        public EnderecoModel Endereco { get; set; }
-        public TelefoneCreateModel Telefone { get; set; }
+        public EnderecoDto Endereco { get; set; }
+        public TelefoneCreateDto Telefone { get; set; }
 
     }
 
-    public class ClienteResponseModel
+    public class ClienteResponseDto
     {
         public string Nome { get; set; }
         public string Email { get; set; }
 
-        public EnderecoModel Endereco { get; set; }
-        public TelefoneCreateModel Telefone { get; set; }
+        public EnderecoDto Endereco { get; set; }
+        public TelefoneCreateDto Telefone { get; set; }
         public List<PedidoCliente> Pedidos { get; set; } = [];
     }
 
@@ -28,6 +28,6 @@ namespace LivrariaFiap.Application.Dtos
     {
         public double ValorPedido { get; set; }
         public StatusPedido Status { get; set; }
-        public ICollection<ItemPedidoResponseModel> ItemsPedido { get; set; }
+        public ICollection<ItemPedidoResponseDto> ItemsPedido { get; set; }
     }
 }

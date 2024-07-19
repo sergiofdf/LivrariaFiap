@@ -17,7 +17,6 @@ namespace LivrariaFiap.Infrastructure.Repository.Configurations
             builder.Property(p => p.Editora).HasColumnType("VARCHAR(100)").IsRequired();
             builder.Property(p => p.Tema).HasColumnType("VARCHAR(100)").IsRequired();
             builder.Property(p => p.Preco).HasColumnType("NUMERIC(8,2)").IsRequired();
-
         }
     }
 }
