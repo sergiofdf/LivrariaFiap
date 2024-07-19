@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LivrariaFiap.Application.Dtos;
+using LivrariaFiap.Application.LivroServices;
 using LivrariaFiap.Domain.Abstractions;
 using LivrariaFiap.Domain.Entities;
 
@@ -8,22 +9,27 @@ namespace LivrariaFiap.Application.PedidosServices
     public class ItemPedidoService : IItemPedidoService
     {
         private readonly IItemPedidoRepository _repository;
+        private readonly ILivroService _livroService;
         private readonly IMapper _mapper;
-        public ItemPedidoService(IItemPedidoRepository repository, IMapper mapper)
+        public ItemPedidoService(IItemPedidoRepository repository, IMapper mapper, ILivroService livroService)
         {
             _repository = repository;
             _mapper = mapper;
+            _livroService = livroService;
         }
 
         public async Task Alterar(int id, ItemPedidoDto dto)
         {
             var itemPedidoResponseDto = await ObterPorId(id) ?? throw new Exception("Item não existe");
+            var livroResponseDto = await _livroService.ObterPorId(dto.LivroId) ?? throw new Exception("Livro do pedido não encontrado.");
 
             var entity = _mapper.Map<ItemPedido>(itemPedidoResponseDto);
 
             _mapper.Map(dto, entity);
 
             entity.Id = id;
+
+            entity.PrecoTotalItem = entity.Quantidade * livroResponseDto.Preco;
 
             _repository.Alterar(entity);
 
@@ -32,6 +38,10 @@ namespace LivrariaFiap.Application.PedidosServices
         public async Task Cadastrar(ItemPedidoDto dto)
         {
             var entity = _mapper.Map<ItemPedido>(dto);
+
+            var livroResponseDto = await _livroService.ObterPorId(dto.LivroId) ?? throw new Exception("Livro do pedido não encontrado.");
+
+            entity.PrecoTotalItem = entity.Quantidade * livroResponseDto.Preco;
 
             _repository.Cadastrar(entity);
         }

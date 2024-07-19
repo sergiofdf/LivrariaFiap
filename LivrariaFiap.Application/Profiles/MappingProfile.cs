@@ -21,9 +21,10 @@ namespace LivrariaFiap.Application.Profiles
             CreateMap<EstoqueResponseDto, Estoque>()
                 .ForMember(dst => dst.Id, opt => opt.Ignore());
 
-            CreateMap<PedidoDto, Pedido>();
+            CreateMap<ItemPedidoDto, ItemPedido>();
+            CreateMap<ItemPedido, ItemPedidoResponseDto>().ReverseMap();
 
-            CreateMap<ItemPedidoResponseDto, ItemPedido>();
+            CreateMap<PedidoDto, Pedido>();
 
             CreateMap<EnderecoDto, Endereco>();
             CreateMap<TelefoneCreateDto, Telefone>();
