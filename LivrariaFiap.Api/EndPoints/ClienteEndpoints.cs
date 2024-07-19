@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Carter;
-using LivrariaFiap.Api.Models;
+using LivrariaFiap.Application.Dtos;
 using LivrariaFiap.Domain.Abstractions;
 using LivrariaFiap.Domain.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace LivrariaFiap.Api.EndPoints
 {
@@ -11,15 +12,16 @@ namespace LivrariaFiap.Api.EndPoints
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("api/clientes");
-            group.MapPost("", CadastraCliente);
+            group.MapPost("", CadastrarCliente);
+            group.MapGet("", ListarClientes);
+            group.MapGet("{id}", ConsultarCliente).WithName(nameof(ConsultarCliente));
             //group.MapPut("{id}", UpdateProduct).WithName(nameof(UpdateProduct));
         }
 
-        public static async Task<IResult> CadastraCliente(
+        public async Task<Created> CadastrarCliente(
             ClienteModel requestBody,
             IClienteService service,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
 
             Endereco mappedEnd = mapper.Map<Endereco>(requestBody.Endereco);
@@ -35,7 +37,28 @@ namespace LivrariaFiap.Api.EndPoints
 
             await service.Cadastrar(entity);
 
-            return Results.Ok();
+            return TypedResults.Created();
+        }
+
+        public async Task<Ok<IList<Cliente>>> ListarClientes(
+            IClienteService service,
+            IMapper mapper)
+        {
+            var clientes = await service.ObterTodos() ?? new List<Cliente>();
+
+            return TypedResults.Ok(clientes);
+        }
+
+        public async Task<Results<Ok<Cliente>, NotFound<string>>> ConsultarCliente(
+            int id,
+            IClienteService service)
+        {
+
+            var cliente = await service.ObterPorId(id);
+
+            if (cliente is null) return TypedResults.NotFound("Cliente não encontrado!");
+
+            return TypedResults.Ok(cliente);
         }
     }
 }

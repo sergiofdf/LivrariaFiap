@@ -1,4 +1,5 @@
 ﻿using LivrariaFiap.Application.ClienteServices;
+using LivrariaFiap.Application.LivroServices;
 using LivrariaFiap.Domain.Abstractions;
 using LivrariaFiap.Infrastructure.Repository;
 
@@ -10,6 +11,8 @@ namespace LivrariaFiap.Api.Extensions
         {
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<ILivroRepository, LivroRepository>();
             return services;
         }
     }

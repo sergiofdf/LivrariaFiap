@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LivrariaFiap.Domain.Entities
 {
     public class Cliente : EntityBase
@@ -8,6 +10,7 @@ namespace LivrariaFiap.Domain.Entities
 
         public Endereco Endereco { get; set; }
         public Telefone Telefone { get; set; }
-        public ICollection<Pedido> Pedidos { get; set; }
+        [NotMapped]
+        public ICollection<Pedido> Pedidos { get; set; } = [];
     }
 }

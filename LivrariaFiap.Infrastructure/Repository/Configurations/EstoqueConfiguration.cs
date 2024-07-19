@@ -13,7 +13,6 @@ namespace LivrariaFiap.Infrastructure.Repository.Configurations
             //builder.Property(p => p.Id).HasColumnType("Integer").ValueGeneratedNever().UseIdentityColumn();
             builder.Property(p => p.DataCriacao).HasColumnType("timestamp").IsRequired();
             builder.Property(p => p.Quantidade).HasColumnType("SMALLINT");
-
         }
     }
 }

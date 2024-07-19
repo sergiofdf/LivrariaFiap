@@ -29,7 +29,7 @@ namespace LivrariaFiap.Application
 
         public async Task<T>? ObterPorId(int id) => _repository.ObterPorId(id);
 
-        public async Task<IList<T>> ObterTodos() => _repository.ObterTodos();
+        public virtual async Task<IList<T>> ObterTodos() => _repository.ObterTodos();
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Carter;
+using LivrariaFiap.Application.Profiles;
 
 namespace LivrariaFiap.Api.Extensions
 {
@@ -7,7 +8,7 @@ namespace LivrariaFiap.Api.Extensions
 
         public static IServiceCollection AddExtensionServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddCarter();
             return services;
         }

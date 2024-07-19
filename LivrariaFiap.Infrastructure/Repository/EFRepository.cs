@@ -33,7 +33,7 @@ namespace LivrariaFiap.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public T? ObterPorId(int id) => _dbSet.FirstOrDefault(entity => entity.Id == id);
+        public T? ObterPorId(int id) => _dbSet.AsNoTracking().FirstOrDefault(entity => entity.Id == id);
 
         public IList<T> ObterTodos() => _dbSet.ToList();
 
