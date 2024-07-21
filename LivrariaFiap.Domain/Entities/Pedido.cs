@@ -3,8 +3,10 @@
     public class Pedido : EntityBase
     {
         public double ValorPedido { get; set; }
-        public StatusPedido Status { get; set; }
+        public StatusPedido Status { get; set; } = StatusPedido.Iniciado;
         public ICollection<ItemPedido> ItemsPedido { get; set; } = [];
+
+        public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
     }

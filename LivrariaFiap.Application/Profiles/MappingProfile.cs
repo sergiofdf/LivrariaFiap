@@ -25,6 +25,8 @@ namespace LivrariaFiap.Application.Profiles
             CreateMap<ItemPedido, ItemPedidoResponseDto>().ReverseMap();
 
             CreateMap<PedidoDto, Pedido>();
+            CreateMap<CadastroPedidoItemDto, ItemPedido>();
+            CreateMap<Pedido, PedidoResponseDto>();
 
             CreateMap<EnderecoDto, Endereco>();
             CreateMap<TelefoneCreateDto, Telefone>();

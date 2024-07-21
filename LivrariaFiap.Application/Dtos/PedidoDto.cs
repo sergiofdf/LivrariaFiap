@@ -4,9 +4,7 @@ namespace LivrariaFiap.Application.Dtos
 {
     public class PedidoDto
     {
-        public double ValorPedido { get; set; }
-        public StatusPedido Status { get; set; }
-        public ICollection<ItemPedidoDto> ItemsPedido { get; set; } = [];
+        public ICollection<CadastroPedidoItemDto> ItemsPedido { get; set; } = [];
         public int ClienteId { get; set; }
     }
 
@@ -14,8 +12,8 @@ namespace LivrariaFiap.Application.Dtos
     {
         public double ValorPedido { get; set; }
         public StatusPedido Status { get; set; }
-        public ICollection<ItemPedido> ItemsPedido { get; set; }
-        public Cliente Cliente { get; set; }
+        public ICollection<ItemPedidoResponseDto> ItemsPedido { get; set; } = [];
+        public int ClienteId { get; set; }
         public DateTime DataCriacao { get; set; }
     }
 }

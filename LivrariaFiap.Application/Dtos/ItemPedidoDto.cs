@@ -7,6 +7,12 @@
         public int LivroId { get; set; }
     }
 
+    public class CadastroPedidoItemDto
+    {
+        public int Quantidade { get; set; }
+        public int LivroId { get; set; }
+    }
+
     public class ItemPedidoResponseDto
     {
         public int Quantidade { get; set; }

@@ -19,6 +19,8 @@ namespace LivrariaFiap.Api.Extensions
             services.AddScoped<IEstoqueRepository, EstoqueRepository>();
             services.AddScoped<IItemPedidoService, ItemPedidoService>();
             services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
+            services.AddScoped<IPedidoService, PedidoService>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             return services;
         }
     }
