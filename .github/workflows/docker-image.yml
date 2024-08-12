@@ -18,4 +18,10 @@ jobs:
       with:
         username: sergiofdf
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          
+
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v6.6.1
+      with:
+        context: .  
+        tags: latest
+        push: true
