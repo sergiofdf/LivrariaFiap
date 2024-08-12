@@ -7,8 +7,10 @@ on: workflow_dispatch
 #    branches: [ "master", "developer" ]
 
 jobs:
-  build:
+  test_job:
+    name: Executando job de teste
     runs-on: ubuntu-latest
+    
     steps:
     - name: Step 1
     - uses: actions/checkout@v4
