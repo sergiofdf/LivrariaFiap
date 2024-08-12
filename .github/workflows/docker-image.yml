@@ -23,5 +23,5 @@ jobs:
       uses: docker/build-push-action@v6.6.1
       with:
         context: .  
-        tags: latest
+        tags: 'sergiofdf/livraria-fiap:latest'
         push: true
