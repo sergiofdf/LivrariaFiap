@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaFiap.Api", "LivrariaFiap.Api\LivrariaFiap.Api.csproj", "{F1190449-C176-4ABF-B236-179AFEC8D702}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EA1C9C80-A34D-410F-B026-4B989A583214}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaFiap.Infrastructure", "LivrariaFiap.Infrastructure\LivrariaFiap.Infrastructure.csproj", "{4BD71B6E-D0A5-49F5-B8B2-C8E32AF48877}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaFiap.Domain", "LivrariaFiap.Domain\LivrariaFiap.Domain.csproj", "{FF2A54B9-8A33-402E-A9AF-800039886D19}"
