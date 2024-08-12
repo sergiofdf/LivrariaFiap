@@ -1,19 +1,20 @@
 name: Test Workflow
 
-on: workflow_dispatch
-#  push:
-#    branches: [ "master", "developer" ]
-#  pull_request:
-#    branches: [ "master", "developer" ]
+#on: workflow_dispatch
+on:
+  push:
+    branches: [ "master", "developer" ]
+  pull_request:
+    branches: [ "master", "developer" ]
 
 jobs:
-  test_job:
-    name: Executando job de teste
+  create_image:
+    name: Executando job de criacao da imagem
     runs-on: ubuntu-latest
     
     steps:
-    - name: Step 1
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+    - uses: actions/checkout@v2
 
     - name: Docker Login
       uses: docker/login-action@v3.3.0
